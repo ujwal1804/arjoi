@@ -7,6 +7,14 @@
   --foreground: #171717;
 }
 
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("/fonts/MyCustomFont.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -17,5 +25,42 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "MyCustomFont", sans-serif;
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.2); /* White background with transparency */
+  backdrop-filter: blur(10px); /* Blur effect */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.btn-secondary {
+  padding: 10px 20px;
+}
+.btn-primary {
+  padding: 10px 20px;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+.popout-image {
+  animation: float 6s ease-in-out infinite;
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.2));
+  border: 1px solid rgba(233, 182, 216, 0.842);
+}
+.gradient-bg {
+  background: linear-gradient(90deg, #f9f9f9 60%, transparent 100%);
 }
