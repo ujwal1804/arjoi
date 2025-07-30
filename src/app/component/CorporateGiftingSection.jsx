@@ -1,116 +1,100 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaTarget, FaPalette, FaBoxOpen, FaRocket, FaArrowRight } from 'react-icons/fa';
+import { HiSparkles } from 'react-icons/hi';
+import { MdBusiness, MdStar } from 'react-icons/md';
 
 const CorporateGiftingSection = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
+  const processSteps = [
+    { icon: FaTarget, title: 'Consultation', desc: 'Understanding your brand goals' },
+    { icon: FaPalette, title: 'Customization', desc: 'Tailored brand integration' },
+    { icon: FaBoxOpen, title: 'Curation', desc: 'Hand-selected products' },
+    { icon: FaRocket, title: 'Delivery', desc: 'White-glove service' }
+  ];
+
+  const budgetOptions = [
+    { range: 'AED 25-50', title: 'Starter', icon: HiSparkles },
+    { range: 'AED 50-100', title: 'Professional', icon: MdBusiness },
+    { range: 'AED 100+', title: 'Executive', icon: MdStar }
+  ];
+
   return (
-    <section id="corporate" className="section-spacing py-16">
+    <section id="corporate" className="py-32 ">
       <div className="container-custom">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="mb-4  font-serif text-pink-600">Corporate Gifting</h2>
-          <p className="text-gray-600 text-lg">
-            For teams, clients, and milestones that matter — Arjoi crafts elegant gifts that feel personal.
+        {/* Header */}
+        <div className="text-center mb-24">
+          <h2 className="text-5xl font-serif text-pink-600 mb-4">
+            Corporate Gifting
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Thoughtfully curated gifts that reflect your brand's values
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-          {/* Customization Options */}
-          <div className="card p-8 md:p-10 glassmorphism shadow-lg rounded-lg transition-transform transform hover:scale-105 text-pink-600">
-            <h3 className="text-xl mb-6 font-medium text-pink-600">What You Can Customize</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start">
-                <svg className="w-6 h-6 text-pink-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <div>
-                  <span className="font-medium block mb-1">Branding</span>
-                  <span className="text-sm text-gray-600">Add your logo to packaging</span>
+
+        {/* Process Steps */}
+        <div className="mb-24">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-5xl mx-auto">
+            {processSteps.map((step, index) => {
+              const IconComponent = step.icon;
+              return (
+                <div
+                  key={index}
+                  className="text-center group cursor-pointer"
+                  onMouseEnter={() => setActiveStep(index)}
+                >
+                  <div className={`
+                    w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center
+                    transition-all duration-300
+                    ${activeStep === index 
+                      ? 'bg-pink-600 text-white' 
+                      : 'bg-pink-100 text-pink-600 group-hover:bg-pink-200'
+                    }
+                  `}>
+                    {step.icon}
+                  </div>
+                  <h3 className="font-serif text-lg text-pink-600 mb-2">{step.title}</h3>
+                  <p className="text-sm text-gray-600">{step.desc}</p>
                 </div>
-              </li>
-              <li className="flex items-start">
-                <svg className="w-6 h-6 text-pink-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <div>
-                  <span className="font-medium block mb-1">Inserts</span>
-                  <span className="text-sm text-gray-600">Custom messages and cards</span>
-                </div>
-              </li>
-              <li className="flex items-start">
-                <svg className="w-6 h-6 text-pink-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <div>
-                  <span className="font-medium block mb-1">Bulk packaging</span>
-                  <span className="text-sm text-gray-600">Efficient delivery solutions</span>
-                </div>
-              </li>
-              <li className="flex items-start">
-                <svg className="w-6 h-6 text-pink-600 mr-3 mt-0.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <div>
-                  <span className="font-medium block mb-1">Delivery dates</span>
-                  <span className="text-sm text-gray-600">Scheduled to your timeline</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Budget Options */}
-          <div className="card p-8 md:p-10 glassmorphism shadow-lg rounded-lg transition-transform transform hover:scale-105 text-pink-600">
-            <h3 className="text-xl mb-6 font-medium text-pink-600">Packages by Budget</h3>
-            <div className="space-y-6">
-              <div className="pb-5 border-b border-pink-600">
-                <h4 className="font-medium mb-2">Under AED 50</h4>
-                <p className="text-sm text-gray-600 mb-3">Small tokens of appreciation</p>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Mini candle sets</li>
-                  <li>• Personalized gift tags</li>
-                  <li>• Branded matches</li>
-                </ul>
-              </div>
-              <div className="pb-5 border-b border-pink-600">
-                <h4 className="font-medium mb-2">AED 50–100</h4>
-                <p className="text-sm text-gray-600 mb-3">Mid-range gift options</p>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Signature candles</li>
-                  <li>• Gift sets with 2-3 items</li>
-                  <li>• Custom packaging</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-medium mb-2">AED 100+</h4>
-                <p className="text-sm text-gray-600 mb-3">Premium gift experiences</p>
-                <ul className="text-sm text-gray-600 space-y-1">
-                  <li>• Luxury gift boxes</li>
-                  <li>• Complete gift experiences</li>
-                  <li>• VIP customization</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          
-          {/* Testimonials */}
-          <div className="card p-8 md:p-10 glassmorphism shadow-lg rounded-lg transition-transform transform hover:scale-105">
-            <h3 className="text-xl mb-6 font-medium text-pink-600">Trusted By</h3>
-            <p className="mb-6 text-gray-600">"Trusted by kind-hearted teams & thoughtful leaders."</p>
-            <div className="grid grid-cols-2 gap-4 mb-6 text-black">
-              <div className="h-16 bg-white border border-gray-100 rounded-md flex items-center justify-center shadow-soft ">Logo 1</div>
-              <div className="h-16 bg-white border border-gray-100 rounded-md flex items-center justify-center shadow-soft">Logo 2</div>
-              <div className="h-16 bg-white border border-gray-100 rounded-md flex items-center justify-center shadow-soft">Logo 3</div>
-              <div className="h-16 bg-white border border-gray-100 rounded-md flex items-center justify-center shadow-soft">Logo 4</div>
-            </div>
-            <div className="bg-white p-4 rounded-md shadow-lg">
-              <p className="text-sm italic text-gray-600 mb-2">"The attention to detail and quality of Arjoi's corporate gifts made our client appreciation event truly special."</p>
-              <p className="text-sm font-medium">— Sarah K., Marketing Director</p>
-            </div>
+              );
+            })}
           </div>
         </div>
-        
+
+        {/* Budget Options */}
+        <div className="mb-24">
+          <h3 className="text-2xl font-serif text-pink-600 text-center mb-12">Investment Levels</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            {budgetOptions.map((option, index) => {
+              return (
+                <div key={index} className="text-center p-6 border border-pink-200 rounded-lg hover:border-pink-400 transition-colors duration-300">
+                  <div className="text-2xl text-pink-600 mx-auto mb-3" >
+                    {option.icon}
+                  </div>
+                  <div className="text-xl font-serif text-pink-600 mb-1">{option.range}</div>
+                  <div className="text-gray-600">{option.title}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Testimonial */}
+        <div className="text-center mb-16 max-w-2xl mx-auto">
+          <blockquote className="text-lg text-gray-700 mb-4">
+            "Arjoi transformed our client appreciation strategy with beautifully crafted gifts."
+          </blockquote>
+          <cite className="text-pink-600">— Sarah Chen, Head of Partnerships</cite>
+        </div>
+
+        {/* CTA */}
         <div className="text-center">
-          <a href="#contact" className="btn-secondary bg-pink-600 text-white rounded-full shadow-lg hover:bg-pink-500 transition">
-            <span>Inquire About Corporate Orders</span>
-           
-          </a>
+          <button className="group px-8 py-3 bg-pink-600 text-white rounded-full hover:bg-pink-700 transition-colors duration-300">
+            <span className="flex items-center gap-2">
+              Start Your Journey
+              <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
+            </span>
+          </button>
         </div>
       </div>
     </section>
