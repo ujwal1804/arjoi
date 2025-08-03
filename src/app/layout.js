@@ -1,6 +1,14 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "./component/Navigation";
+import localFont from 'next/font/local';
+import Footer from "./component/Footer";
+
+
+const ciguatera = localFont({
+  src: "./fonts/ciguatera.ttf",
+  variable: "--font-ciguatera",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,11 +29,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${ciguatera.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
       <Navigation  />
 
         {children}
+
+        <Footer/>
       </body>
     </html>
   );

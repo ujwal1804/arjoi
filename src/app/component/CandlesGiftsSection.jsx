@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { FaHeart, FaShoppingCart, FaClock, FaLeaf, FaStar, FaFire, FaGift, FaSprayCan } from 'react-icons/fa';
+import React, { useState } from "react";
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
 
-const CandlesGiftsSection = ({ activeTab, setActiveTab }) => {
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+const CandlesGiftsSection = () => {
+  // State to track the hovered card on desktop screens.
+  // This is not used for mobile/tablet layouts.
+  const [hoveredCard, setHoveredCard] = useState(1);
 
   const products = [
     {
@@ -13,8 +14,8 @@ const CandlesGiftsSection = ({ activeTab, setActiveTab }) => {
       tagline: "For quiet mornings and prayers",
       scent: "Lavender & Vanilla",
       burnTime: "40 hours",
+      image: "/assets/noor.jpg",
       quote: "A gentle light that guides you back to yourself",
-      category: "featured"
     },
     {
       id: 2,
@@ -23,8 +24,8 @@ const CandlesGiftsSection = ({ activeTab, setActiveTab }) => {
       tagline: "For evenings of reflection",
       scent: "Oud & Amber",
       burnTime: "35 hours",
+      image: "/assets/sukoon.jpg",
       quote: "In stillness, find the peace that was always there",
-      category: "oud"
     },
     {
       id: 3,
@@ -33,129 +34,157 @@ const CandlesGiftsSection = ({ activeTab, setActiveTab }) => {
       tagline: "For moments of gratitude",
       scent: "Sandalwood & Rose",
       burnTime: "45 hours",
+      image: "/assets/shukr.jpg",
       quote: "Every breath, a thank you to the universe",
-      category: "sandal"
-    }
-  ];
-
-  const filters = [
-    { id: 'featured', label: 'Featured', icon: FaStar },
-    { id: 'lavender', label: 'Lavender', icon: FaSprayCan },
-    { id: 'oud', label: 'Oud', icon: FaLeaf },
-    { id: 'sandal', label: 'Sandal', icon: FaFire },
-    { id: 'festive', label: 'Festive Spice', icon: FaGift }
+    },
+    {
+      id: 4,
+      name: "Serene",
+      price: "AED 88",
+      tagline: "A breath of fresh air",
+      scent: "Eucalyptus & Mint",
+      burnTime: "42 hours",
+      image: "/assets/serene.jpg",
+      quote: "Find your quiet corner in a busy world",
+    },
   ];
 
   return (
-    <section id="candles" className="py-20 relative overflow-hidden">
-      <div className="container-custom relative">
-        {/* Floating Header */}
+    <section id="candles" className="py-20 relative w-[90vw] mx-auto">
+      <div className="relative">
         <div className="text-center mb-16 relative">
-          <div className=" inline-block ">
-            <h2 className="text-6xl md:text-7xl font-serif text-white mb-2">Candles & Gifts</h2>
-            <p className="text-xl text-white/80 max-w-md mx-auto">
-              Hand-poured with intention, crafted to bring warmth to your space
-            </p>
-          </div>
+          <h2 className="text-6xl md:text-7xl font-ciguatera text-gray-800 mb-2">
+            Candles & Gifts
+          </h2>
+          <p className="text-xl text-gray-700 max-w-md mx-auto">
+            Hand-poured with intention, crafted to bring warmth to your space
+          </p>
         </div>
-        
-        {/* Floating Filters */}
-        <div className="flex flex-wrap gap-3 mb-16 justify-center">
-          {filters.map((filter) => {
-            const IconComponent = filter.icon;
+
+        {/* This layout is for Desktop screens and above (lg and up).
+          It features the complex hover effect with expanding cards.
+        */}
+        <div className="hidden lg:flex  flex-row items-center justify-center gap-8 group"
+          onMouseLeave={() => setHoveredCard(1)} // Revert to the first card on mouse leave
+        >
+          {products.map((product) => {
+            const isHovered = hoveredCard === product.id;
+            const cardClass = isHovered ? "w-[45vw] " : "w-[12vw]";
+
             return (
-              <button 
-                key={filter.id}
-                className={`glassmorphism px-6 py-3 rounded-full border transition-all duration-300 ${
-                  activeTab === filter.id 
-                    ? 'border-white/40 bg-white/20 text-white scale-105' 
-                    : 'border-white/20 bg-white/10 text-white/70 hover:bg-white/15 hover:scale-105'
-                }`}
-                onClick={() => setActiveTab(filter.id)}
+              <div
+                key={product.id}
+                className={`
+                  ${cardClass} h-[95vh]
+                  bg-gray-50 rounded-[2rem] shadow-sm
+                  flex-shrink-0 relative overflow-hidden
+                  transition-all duration-500 ease-in-out
+                  cursor-pointer
+                `}
+                onMouseEnter={() => setHoveredCard(product.id)}
               >
-                <span className="flex items-center gap-2 text-lg">
-                  <IconComponent className="text-lg" />
-                  <span className="font-medium">{filter.label}</span>
-                </span>
-              </button>
+                {/* Content for the Expanded Card (Desktop) */}
+                <div
+                  className={`
+                    p-6 flex flex-col h-full absolute inset-0
+                    transition-all duration-500 ease-in-out
+                    ${
+                      isHovered
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 translate-x-full"
+                    }
+                  `}
+                >
+                  <div className="relative overflow-hidden h-64 rounded-[2rem] mb-4">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover transition-all duration-300 transform-gpu group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="flex flex-col flex-grow justify-between text-center">
+                    <div>
+                      <h3 className="text-3xl font-ciguatera text-gray-800 mb-1">
+                        {product.name}
+                      </h3>
+                      <p className="text-lg text-gray-600 mb-2">
+                        {product.tagline}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold text-black mb-4">
+                        {product.price}
+                      </p>
+                      <button className="w-full px-4 py-3 border-2 border-black text-black rounded-full font-medium text-base hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                        <FaShoppingCart className="text-sm" />
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content for the Collapsed Card (Desktop) */}
+                <div
+                  className={`
+                    flex items-center justify-center h-full absolute inset-0
+                    transition-all duration-500 ease-in-out
+                    ${isHovered ? "opacity-0 translate-x-full" : "opacity-100"}
+                  `}
+                >
+                  <h3 className="text-3xl font-ciguatera text-gray-800 -rotate-90 origin-center whitespace-nowrap">
+                    {product.name}
+                  </h3>
+                </div>
+              </div>
             );
           })}
         </div>
-        
-        {/* Floating Product Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product, index) => (
+
+        {/* This layout is for Mobile and Tablet screens (hidden on lg and up).
+          It uses a clean grid for better usability on touch devices.
+        */}
+        <div className="lg:hidden grid grid-cols-1 md:grid-cols-2 gap-8">
+          {products.map((product) => (
             <div
               key={product.id}
-              className="group relative"
-              onMouseEnter={() => setHoveredCard(product.id)}
-              onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => setSelectedProduct(selectedProduct === product.id ? null : product.id)}
+              className="w-full  h-[450px] bg-gray-50 rounded-[2rem] shadow-sm relative overflow-hidden"
             >
-              {/* Main Card */}
-              <div className={`glassmorphism rounded-3xl border border-white/20 overflow-hidden cursor-pointer transition-all duration-500 ${
-                hoveredCard === product.id ? 'scale-105 border-white/30' : 'scale-100'
-              } ${selectedProduct === product.id ? 'ring-2 ring-white/30' : ''}`}>
-                
-                {/* Candle Visual */}
-                <div className="h-64 relative flex items-center justify-center p-8">
-                  <div className="relative">
-                    {/* Candle Body */}
-                    <div className={`w-24 h-32 bg-gradient-to-b from-white/30 to-white/10 rounded-lg backdrop-blur-sm border border-white/20 transition-all duration-500 ${
-                      hoveredCard === product.id ? 'scale-110' : 'scale-100'
-                    }`} />
-                    
-                    {/* Flame */}
-                    <div className={`absolute -top-3 left-1/2 transform -translate-x-1/2 w-3 h-6 bg-gradient-to-t from-orange-400/80 to-yellow-300/80 rounded-full transition-all duration-300 ${
-                      hoveredCard === product.id ? 'opacity-100 scale-110 animate-pulse' : 'opacity-70'
-                    }`} />
-                    
-                    {/* Glow Effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/10 rounded-lg transition-opacity duration-500 ${
-                      hoveredCard === product.id ? 'opacity-100' : 'opacity-0'
-                    }`} />
-                  </div>
-                  
-                  {/* Floating Heart */}
-                  <button className={`absolute top-4 right-4 glassmorphism w-10 h-10 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 ${
-                    hoveredCard === product.id ? 'opacity-100 scale-110' : 'opacity-0'
-                  }`}>
-                    <FaHeart className="text-white/70 text-sm" />
-                  </button>
+              <div className="p-6 flex flex-col h-full">
+                <div className="relative overflow-hidden h-64 rounded-[2rem] mb-4">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-all duration-300"
+                  />
                 </div>
-                {/* Product Info */}
-                <div className="p-6 space-y-4">
-                  <div className="flex justify-between items-start">
-                    <h3 className="text-2xl font-serif text-white mb-2">{product.name}</h3>
-                    <p className="text-lg text-white/70 mb-1">{product.tagline}</p>
-                    <p className="text-xl font-bold text-pink-300 mb-3">{product.price}</p>
+                <div className="flex flex-col flex-grow justify-between text-center">
+                  <div>
+                    <h3 className="text-3xl font-ciguatera text-gray-800 mb-1">
+                      {product.name}
+                    </h3>
+                    <p className="text-lg text-gray-600 mb-2">
+                      {product.tagline}
+                    </p>
                   </div>
-                  
-                  <p className="text-base text-white/60 mb-4 italic">"{product.quote}"</p>
-                  
-                  {/* Product Details */}
-                  <div className="text-base text-white/80 space-y-2">
-                    <p><span className="font-medium">Scent:</span> {product.scent}</p>
-                    <p><span className="font-medium">Burn Time:</span> {product.burnTime}</p>
+                  <div>
+                    <p className="text-2xl font-bold text-black mb-4">
+                      {product.price}
+                    </p>
+                    <button className="w-full px-4 py-3 border-2 border-black text-black rounded-full font-medium text-base hover:bg-black hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                      <FaShoppingCart className="text-sm" />
+                      Add to Cart
+                    </button>
                   </div>
-                  
-                  {/* Add to Cart Button */}
-                  <button className="w-full glassmorphism py-3 rounded-xl border border-white/20 text-white font-medium text-sm hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 group">
-                    <FaShoppingCart className="text-xs group-hover:scale-110 transition-transform duration-300" />
-                    Add to Cart
-                  </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Floating CTA */}
         <div className="text-center mt-16">
-          <button className="glassmorphism px-8 py-4 rounded-full border border-white/20 text-white font-medium hover:bg-white/10 transition-all duration-300 group">
-            <span className="flex items-center gap-2">
+          <button className="group relative px-8 py-4 bg-transparent border-2 border-black rounded-full overflow-hidden transition-all duration-300 hover:border-white backdrop-filter backdrop-blur-sm">
+            <span className="relative z-10 text-black group-hover:text-white transition-colors duration-300 font-medium">
               Explore All Candles
-              <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
             </span>
           </button>
         </div>
@@ -165,4 +194,3 @@ const CandlesGiftsSection = ({ activeTab, setActiveTab }) => {
 };
 
 export default CandlesGiftsSection;
-

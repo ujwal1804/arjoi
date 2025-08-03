@@ -13,6 +13,7 @@
     "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.2.0",
     "@shadergradient/react": "^2.1.2",
+    "framer-motion": "^12.23.12",
     "next": "15.1.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

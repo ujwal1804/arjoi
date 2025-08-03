@@ -8,6 +8,14 @@
 }
 
 @font-face {
+  font-family: "Ciguatera";
+  src: url("/fonts/Ciguatera.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "MyCustomFont";
   src: url("/fonts/MyCustomFont.ttf") format("truetype");
   font-weight: 400;
@@ -25,7 +33,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "MyCustomFont", sans-serif;
+  font-family:"Ciguatera", "MyCustomFont", sans-serif;
 }
 
 .glassmorphism {

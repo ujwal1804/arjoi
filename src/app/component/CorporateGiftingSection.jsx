@@ -1,196 +1,213 @@
-import React, { useState } from 'react';
-import { FaTarget, FaPalette, FaBoxOpen, FaRocket, FaArrowRight, FaQuoteLeft, FaCheck } from 'react-icons/fa';
-import { HiSparkles } from 'react-icons/hi';
-import { MdBusiness, MdStar } from 'react-icons/md';
+import React, { useState } from "react";
+import {
+  FaAngleDown,
+  FaCheck,
+  FaQuoteLeft,
+  FaGift,
+  FaBriefcase,
+  FaCrown,
+  FaMagic,
+  FaRocket,
+} from "react-icons/fa";
+import { MdCorporateFare } from "react-icons/md";
 
 const CorporateGiftingSection = () => {
-  const [activeStep, setActiveStep] = useState(0);
-  const [selectedPackage, setSelectedPackage] = useState(null);
+  const [expandedStep, setExpandedStep] = useState(0);
+  const [selectedPackage, setSelectedPackage] = useState(1);
 
   const processSteps = [
-    { icon: 'FaTarget', title: 'Consultation', desc: 'Understanding your brand goals' },
-    { icon: 'FaPalette', title: 'Customization', desc: 'Tailored brand integration' },
-    { icon: 'FaBoxOpen', title: 'Curation', desc: 'Hand-selected products' },
-    { icon: 'FaRocket', title: 'Delivery', desc: 'White-glove service' }
+    {
+      id: 0,
+      title: "Consultation",
+      desc: "We begin with a detailed consultation to understand your brand identity, objectives, and specific gifting needs. Our goal is to align the gifts with your company's values and vision.",
+      icon: MdCorporateFare,
+    },
+    {
+      id: 1,
+      title: "Curation",
+      desc: "Our experts will hand-select a range of products that fit your budget and brand. We focus on quality and elegance, ensuring each item leaves a lasting impression.",
+      icon: FaGift,
+    },
+    {
+      id: 2,
+      title: "Customization",
+      desc: "From branded packaging to personalized notes, we offer extensive customization options to make each gift uniquely yours. We seamlessly integrate your brand identity into every detail.",
+      icon: FaMagic,
+    },
+    {
+      id: 3,
+      title: "Delivery",
+      desc: "Our white-glove service ensures your gifts are perfectly packaged and delivered on time, every time. We handle all logistics, so you can focus on your business.",
+      icon: FaRocket,
+    },
   ];
 
   const packages = [
-    { 
-      range: 'AED 25-50', 
-      title: 'Starter', 
-      icon: 'HiSparkles',
-      features: ['5-20 items', 'Basic branding', 'Standard packaging'],
-      popular: false
+    {
+      id: 1,
+      range: "AED 25-50",
+      title: "Starter",
+      icon: FaGift,
+      features: ["5-20 items", "Basic branding", "Standard packaging"],
     },
-    { 
-      range: 'AED 50-100', 
-      title: 'Professional', 
-      icon: 'MdBusiness',
-      features: ['20-50 items', 'Custom branding', 'Premium packaging', 'Dedicated support'],
-      popular: true
+    {
+      id: 2,
+      range: "AED 50-100",
+      title: "Professional",
+      icon: FaBriefcase,
+      features: [
+        "20-50 items",
+        "Custom branding",
+        "Premium packaging",
+        "Dedicated support",
+      ],
     },
-    { 
-      range: 'AED 100+', 
-      title: 'Executive', 
-      icon: 'MdStar',
-      features: ['50+ items', 'Full customization', 'Luxury packaging', 'Account manager', 'Priority delivery'],
-      popular: false
-    }
+    {
+      id: 3,
+      range: "AED 100+",
+      title: "Executive",
+      icon: FaCrown,
+      features: [
+        "50+ items",
+        "Full customization",
+        "Luxury packaging",
+        "Account manager",
+        "Priority delivery",
+      ],
+    },
   ];
 
-  const getIcon = (iconName) => {
-    const icons = {
-      FaTarget,
-      FaPalette,
-      FaBoxOpen,
-      FaRocket,
-      HiSparkles,
-      MdBusiness,
-      MdStar
-    };
-    return icons[iconName];
-  };
+  const currentPackage = packages.find((pkg) => pkg.id === selectedPackage);
+  const PackageIcon = currentPackage.icon;
 
   return (
-    <section id="corporate" className="py-32 relative overflow-hidden">
-      <div className="container-custom">
-        {/* Floating Header */}
-        <div className="text-center mb-20">
-          <div className="inline-block">
-            <h2 className="text-6xl md:text-7xl font-serif text-white mb-4">
-              Corporate Gifting
-            </h2>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto mb-12">
-              Elevate your business relationships with thoughtfully curated gift collections
-            </p>
-          </div>
+    <section
+      id="corporate"
+      className="py-24 w-[88vw] mx-auto relative overflow-hidden "
+    >
+      <div className="  ">
+        <div className="text-center mb-16">
+          <h2 className="text-6xl md:text-7xl font-ciguatera text-gray-800 mb-4">
+            Corporate Gifting
+          </h2>
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            Elevate your business relationships with thoughtfully curated gift
+            collections
+          </p>
         </div>
 
-        {/* Interactive Process Timeline */}
-        <div className="mb-24">
-          <div className="relative max-w-4xl mx-auto">
-            {/* Connection Line */}
-            <div className="absolute top-10 left-0 right-0 h-0.5 bg-white/20" />
-            <div 
-              className="absolute top-10 left-0 h-0.5 bg-white/60 transition-all duration-1000"
-              style={{ width: `${(activeStep / (processSteps.length - 1)) * 100}%` }}
-            />
-            
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {processSteps.map((step, index) => {
-                const Icon = getIcon(step.icon);
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          {/* Left Side: Process Accordion */}
+          <div>
+            <h3 className="text-4xl font-ciguatera text-gray-800 mb-8">
+              Our Process
+            </h3>
+            <div className="space-y-6">
+              {processSteps.map((step) => {
+                const Icon = step.icon;
+                const isExpanded = expandedStep === step.id;
                 return (
-                  <div
-                    key={index}
-                    className="text-center group cursor-pointer"
-                    onMouseEnter={() => setActiveStep(index)}
-                  >
-                    <div className={`
-                      glassmorphism w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center
-                      border transition-all duration-500 relative z-10
-                      ${activeStep >= index 
-                        ? 'border-white/60 bg-white/30 scale-110' 
-                        : 'border-white/20 bg-white/10 group-hover:bg-white/20 group-hover:scale-105'
+                  <div key={step.id} className="border-b border-gray-200">
+                    <button
+                      onClick={() =>
+                        setExpandedStep(isExpanded ? null : step.id)
                       }
-                    `}>
-                      {Icon && <Icon className="text-2xl text-white" />}
-                      {activeStep >= index && (
-                        <div className="absolute -top-1 -right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                          <FaCheck className="text-xs text-gray-800" />
-                        </div>
-                      )}
+                      className="w-full flex items-center justify-between py-4 text-left focus:outline-none"
+                    >
+                      <span className="flex items-center">
+                        <Icon className="text-2xl text-black mr-4" />
+                        <span className="text-xl font-medium text-gray-800 font-serif">
+                          {step.title}
+                        </span>
+                      </span>
+                      <FaAngleDown
+                        className={`text-gray-500 transition-transform duration-300 ${
+                          isExpanded ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    <div
+                      className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                        isExpanded ? "max-h-40 py-4" : "max-h-0"
+                      }`}
+                    >
+                      <p className="text-gray-600 pl-10">{step.desc}</p>
                     </div>
-                    <h3 className="font-serif text-lg text-white mb-2">{step.title}</h3>
-                    <p className="text-sm text-white/70">{step.desc}</p>
                   </div>
                 );
               })}
             </div>
           </div>
-        </div>
 
-        {/* Package Cards with Hover Details */}
-        <div className="mb-24">
-          <h3 className="text-3xl font-serif text-white text-center mb-12">Choose Your Package</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {packages.map((pkg, index) => {
-              const Icon = getIcon(pkg.icon);
-              return (
-                <div 
-                  key={index} 
-                  className={`
-                    glassmorphism relative p-8 rounded-3xl border cursor-pointer
-                    transition-all duration-500 group
-                    ${selectedPackage === index 
-                      ? 'border-white/60 bg-white/25 scale-105' 
-                      : 'border-white/20 bg-white/10 hover:bg-white/20 hover:scale-102'
-                    }
-                    ${pkg.popular ? 'ring-2 ring-white/30' : ''}
-                  `}
-                  onClick={() => setSelectedPackage(selectedPackage === index ? null : index)}
-                >
-                  {pkg.popular && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <div className="glassmorphism px-4 py-1 rounded-full border border-white/30 bg-white/20">
-                        <span className="text-xs text-white font-medium">Most Popular</span>
-                      </div>
-                    </div>
-                  )}
-                  
-                  <div className="text-center mb-6">
-                    {Icon && <Icon className="text-4xl text-white mx-auto mb-4" />}
-                    <div className="text-2xl font-serif text-white mb-2">{pkg.range}</div>
-                    <div className="text-white/80 text-lg">{pkg.title}</div>
-                  </div>
+          {/* Right Side: Dynamic Package Selection */}
+          <div className="lg:sticky lg:top-8">
+            <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-200">
+              <h3 className="text-4xl font-ciguatera text-gray-800 mb-6 text-center">
+                Choose a Package
+              </h3>
 
-                  {/* Expandable Features */}
-                  <div className={`
-                    transition-all duration-500 overflow-hidden
-                    ${selectedPackage === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}
-                  `}>
-                    <div className="border-t border-white/20 pt-6 mt-6">
-                      <h4 className="text-white font-medium mb-4">What's included:</h4>
-                      <ul className="space-y-2">
-                        {pkg.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center gap-3 text-white/80 text-sm">
-                            <FaCheck className="text-white/60 text-xs" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+              {/* Package Selector Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                {packages.map((pkg) => (
+                  <button
+                    key={pkg.id}
+                    onClick={() => setSelectedPackage(pkg.id)}
+                    className={`
+                      flex-1 py-3 px-6 rounded-xl border-2 transition-all duration-300
+                      ${
+                        selectedPackage === pkg.id
+                          ? "bg-black text-white border-black scale-105 shadow-md"
+                          : "bg-white text-gray-700 border-gray-300 hover:border-black hover:text-black"
+                      }
+                    `}
+                  >
+                    <span className="font-medium text-lg">{pkg.title}</span>
+                  </button>
+                ))}
+              </div>
 
-                  <div className="mt-6 text-center">
-                    <button className="glassmorphism w-full py-3 rounded-xl border border-white/20 text-white font-medium text-sm hover:bg-white/15 transition-all duration-300">
-                      {selectedPackage === index ? 'Selected' : 'Select Package'}
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+              {/* Display Current Package Details */}
+              <div className="text-center">
+                <PackageIcon className="text-5xl text-black mx-auto mb-4" />
+                <h4 className="text-3xl font-ciguatera text-gray-800 mb-1">
+                  {currentPackage.title} Package
+                </h4>
+                <p className="text-2xl font-bold text-black mb-6">
+                  {currentPackage.range}
+                </p>
+
+                <ul className="space-y-3 text-left max-w-sm mx-auto">
+                  {currentPackage.features.map((feature, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-center gap-4 text-gray-700 text-lg"
+                    >
+                      <FaCheck className="text-black text-xl" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <button className="mt-8 w-full py-4 rounded-full border-2 border-black bg-black text-white font-medium text-lg hover:bg-transparent hover:text-black transition-all duration-300">
+                  Get a Custom Quote
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Floating Testimonial */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <div className="glassmorphism p-8 rounded-3xl border border-white/20 relative">
-            <FaQuoteLeft className="text-3xl text-white/40 mb-4 mx-auto" />
-            <blockquote className="text-xl text-white mb-6 font-light">
-              "Arjoi transformed our client appreciation strategy with beautifully crafted gifts that truly represent our brand values."
+        <div className="mt-24 text-center max-w-3xl mx-auto">
+          <div className="p-8 rounded-3xl relative bg-white shadow-lg border border-gray-200">
+            <FaQuoteLeft className="text-3xl text-gray-300 mb-4 mx-auto" />
+            <blockquote className="text-xl text-gray-800 mb-6 font-light">
+              "Arjoi transformed our client appreciation strategy with
+              beautifully crafted gifts that truly represent our brand values."
             </blockquote>
-            <cite className="text-white/80">— Sarah Chen, Head of Partnerships</cite>
+            <cite className="text-gray-500">
+              — Sarah Chen, Head of Partnerships
+            </cite>
           </div>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center">
-          <button className="group glassmorphism px-10 py-4 border border-white/20 text-white rounded-full hover:bg-white/15 transition-all duration-300">
-            <span className="flex items-center gap-3">
-              Start Your Journey
-              <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
-            </span>
-          </button>
         </div>
       </div>
     </section>
