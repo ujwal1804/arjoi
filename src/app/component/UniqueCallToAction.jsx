@@ -66,7 +66,7 @@ const CreativeCallToAction = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden bg-[#0A0A0A]">
+    <section id="contact" className="relative min-h-screen flex items-center justify-center py-20 overflow-hidden bg-[#0A0A0A]">
       <div className="w-[88vw] mx-auto relative z-10">
         <div className="text-center mb-20">
           <div className="relative inline-block">
@@ -123,7 +123,7 @@ const CreativeCallToAction = () => {
                   `}
                   style={{
                     background: "rgba(255, 255, 255, 0.05)",
-                    boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+                    boxShadow: "0 8px 32px 0 rgba(71, 71, 75, 0.29)",
                     backdropFilter: "blur(4px)",
                     WebkitBackdropFilter: "blur(4px)",
                     border: `1px solid rgba(255, 255, 255, 0.18)`,
