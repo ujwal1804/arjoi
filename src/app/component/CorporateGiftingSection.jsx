@@ -86,6 +86,7 @@ const CorporateGiftingSection = () => {
       className="py-24 mb-24 w-[88vw] mx-auto relative overflow-hidden bg-[#FBF8F3] rounded-3xl shadow-md"
       aria-label="Corporate Gifting Options"
     >
+      
       <div className="px-6 md:px-12">
         <div className="text-center mb-16">
           <h2 className="text-6xl md:text-7xl font-ciguatera text-[#5B4A33] mb-4">
