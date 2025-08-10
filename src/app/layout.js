@@ -6,7 +6,7 @@ import Footer from "./component/Footer";
 
 
 const ciguatera = localFont({
-  src: "./fonts/ciguatera.ttf",
+  src: "./fonts/Ciguatera.ttf",
   variable: "--font-ciguatera",
 });
 
