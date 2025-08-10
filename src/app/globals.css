@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Romantic & Cozy Theme */
+  --background: #F9F5F0; /* Warm Cream */
+  --foreground: #5C4433; /* Rich Warm Brown */
+  --accent: #D7A6A0; /* Dusty Rose */
+  --secondary-text: #333333; /* Charcoal for body text */
 }
 
 @font-face {
@@ -25,50 +28,83 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #2B2B2B;
+    --foreground: #F9F5F0;
+    --accent: #D7A6A0;
+    --secondary-text: #E8DCC3;
   }
 }
 
 body {
-  color: var(--foreground);
+  color: var(--secondary-text);
   background: var(--background);
-  font-family:"Ciguatera", "MyCustomFont", sans-serif;
+  font-family: "Ciguatera", "MyCustomFont", sans-serif;
 }
 
+/* Glassmorphism with soft romantic glow */
 .glassmorphism {
-  background: rgba(255, 255, 255, 0.2); /* White background with transparency */
-  backdrop-filter: blur(10px); /* Blur effect */
-  border-radius: 15px; /* Rounded corners */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  box-shadow: 0 4px 30px rgba(92, 68, 51, 0.1);
+  border: 1px solid rgba(215, 166, 160, 0.4); /* Dusty Rose Border */
 }
 
+/* Buttons */
 .btn-secondary {
   padding: 10px 20px;
+  color: var(--foreground);
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  transition: all 0.3s ease;
 }
+.btn-secondary:hover {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
 .btn-primary {
   padding: 10px 20px;
+  background-color: var(--accent);
+  color: var(--background);
+  border: none;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: var(--foreground);
+  color: var(--background);
 }
 
 h2 {
   font-size: 4rem;
+  color: var(--foreground);
+  font-family: "Ciguatera", "MyCustomFont", sans-serif;
 }
 
+/* Headings */
+h2 {
+  font-size: 4rem;
+  color: var(--foreground);
+}
+
+/* Floating Animation */
 @keyframes float {
-  0%,
-  100% {
+  0%, 100% {
     transform: translateY(0);
   }
   50% {
     transform: translateY(-15px);
   }
 }
+
 .popout-image {
   animation: float 6s ease-in-out infinite;
-  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.2);
-  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.2));
-  border: 1px solid rgba(233, 182, 216, 0.842);
+  box-shadow: 20px 20px 40px rgba(92, 68, 51, 0.15);
+  filter: drop-shadow(0 10px 8px rgba(92, 68, 51, 0.2));
+  border: 1px solid rgba(215, 166, 160, 0.6); /* Dusty Rose Border */
 }
+
+/* Gradient Background */
 .gradient-bg {
-  background: linear-gradient(90deg, #f9f9f9 60%, transparent 100%);
+  background: linear-gradient(90deg, #F9F5F0 60%, transparent 100%);
 }

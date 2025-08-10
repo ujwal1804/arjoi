@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import {
   FaInstagram,
   FaWhatsapp,
@@ -8,6 +10,19 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // For demo: just show a simple alert or set submitted state
+    if (email.trim()) {
+      setSubmitted(true);
+      setEmail("");
+      // Here you can add your newsletter subscribe API call logic
+    }
+  };
+
   return (
     <footer className="bg-[#0A0A0A] text-white/80 py-20">
       <div className="w-[88vw] mx-auto">
@@ -114,21 +129,29 @@ const Footer = () => {
               Join our newsletter for exclusive offers and updates on new
               products.
             </p>
-            <form>
-              <div className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full px-4 py-3 rounded-full bg-white/5 text-sm text-white/80 border border-white/10 focus:outline-none focus:ring-2 focus:ring-white"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3 rounded-full bg-white text-gray-900 font-medium text-sm hover:bg-[#C99FB3] transition-colors duration-300"
-                >
-                  Subscribe
-                </button>
-              </div>
-            </form>
+
+            {submitted ? (
+              <p className="text-green-400 font-medium">Thank you for subscribing!</p>
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 rounded-full bg-white/5 text-sm text-white/80 border border-white/10 focus:outline-none focus:ring-2 focus:ring-white"
+                  />
+                  <button
+                    type="submit"
+                    className="px-6 py-3 rounded-full bg-white text-gray-900 font-medium text-sm hover:bg-[#C99FB3] transition-colors duration-300"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
 

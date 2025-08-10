@@ -16,7 +16,7 @@ const CreativeCallToAction = () => {
       label: "WhatsApp",
       description:
         "Get immediate answers to your questions and start a conversation right away.",
-      color: "#25D366",
+      color: "#F9F5F0",
     },
     {
       id: "instagram",
@@ -24,7 +24,7 @@ const CreativeCallToAction = () => {
       label: "Instagram",
       description:
         "Explore our latest creations, inspiration, and behind-the-scenes stories.",
-      color: "#E4405F",
+      color: "#F9F5F0",
     },
     {
       id: "email",
@@ -32,7 +32,7 @@ const CreativeCallToAction = () => {
       label: "Email",
       description:
         "For detailed inquiries and comprehensive quotes, send us a message.",
-      color: "#4285F4",
+      color: "#F9F5F0",
     },
     {
       id: "phone",
@@ -40,7 +40,7 @@ const CreativeCallToAction = () => {
       label: "Call Us",
       description:
         "Speak directly with our team for a personal consultation and tailored advice.",
-      color: "#FF6B35",
+      color: "#f9f5f044",
     },
   ];
 
@@ -91,14 +91,10 @@ const CreativeCallToAction = () => {
 
             // Parallax effect values
             const parallaxX = isHovered
-              ? (mousePos.x / (cardRefs.current[index]?.offsetWidth || 1) -
-                  0.5) *
-                20
+              ? (mousePos.x / (cardRefs.current[index]?.offsetWidth || 1) - 0.5) * 20
               : 0;
             const parallaxY = isHovered
-              ? (mousePos.y / (cardRefs.current[index]?.offsetHeight || 1) -
-                  0.5) *
-                20
+              ? (mousePos.y / (cardRefs.current[index]?.offsetHeight || 1) - 0.5) * 20
               : 0;
             const bgParallaxX = parallaxX * 0.5;
             const bgParallaxY = parallaxY * 0.5;
@@ -110,6 +106,14 @@ const CreativeCallToAction = () => {
                 className="group relative"
                 onMouseMove={(e) => handleMouseMove(e, index)}
                 onMouseLeave={handleMouseLeave}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    setHoveredCard(index);
+                  }
+                }}
+                aria-label={`Contact via ${method.label}`}
               >
                 <div
                   className={`
@@ -130,7 +134,7 @@ const CreativeCallToAction = () => {
                     className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
                     style={{
                       opacity: isHovered ? 1 : 0,
-                      background: `radial-gradient(circle at ${mousePos.x}px ${mousePos.y}px, ${method.color}20, transparent 60%)`,
+                      background: `radial-gradient(circle at ${mousePos.x}px ${mousePos.y}px, ${method.color}33, transparent 60%)`,
                     }}
                   />
 
@@ -167,6 +171,7 @@ const CreativeCallToAction = () => {
                         bg-white text-gray-800 font-medium transition-all duration-300
                         hover:bg-gray-100
                       `}
+                      tabIndex={-1}
                     >
                       Get Started <FaArrowRight />
                     </a>
